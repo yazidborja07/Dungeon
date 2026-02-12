@@ -1,4 +1,5 @@
-const mapa = [
+const mapa = {
+  dungeon1:[
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
   [1, 0, 1, 1, 0, 0, 0, 1, 0, 1],
@@ -9,12 +10,36 @@ const mapa = [
   [1, 0, 1, 1, 1, 0, 5, 5, 5, 1],
   [1, 0, 0, 0, 0, 1, 5, 5, 5, 1],
   [1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-];
+], dungeon2:[
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+  [1, 0, 0, 5, 0, 1, 1, 0, 0, 1],
+  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 0, 5, 5, 5, 1],
+  [1, 0, 0, 0, 0, 1, 5, 5, 5, 1],
+  [1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+],dungeon3:[
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+  [1, 0, 0, 5, 0, 1, 1, 0, 0, 1],
+  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 0, 5, 5, 5, 1],
+  [1, 0, 0, 0, 0, 1, 5, 5, 5, 1],
+  [1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+]
+};
 /**
  0 - nada
  1 - muro
  5 - Agua
  */
+
 
 let size = 0;
 
@@ -23,6 +48,8 @@ let input;
 let x = 3;
 let y = 3;
 
+let map = mapa.dungeon1
+
 function setup() {
   createCanvas(400, 400);
 
@@ -30,14 +57,14 @@ function setup() {
 
   background(100);
 
-  size = width / mapa.length;
+  size = width / map.length;
 
   console.log(size);
 }
 function dibujarMapa(){
-    for (let y = 0; y < mapa.length; y++) {
-    for (let x = 0; x < mapa[y].length; x++) {
-      const cell = mapa[y][x];
+    for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      const cell = map[y][x];
 
       stroke("white");
 
@@ -56,19 +83,19 @@ function dibujarMapa(){
 
 function draw() {
   if (Input.getButtonPress("ArrowRight")) {
-    if (mapa[y][x + 1] != 1) {
+    if (map[y][x + 1] != 1) {
         x++
     }
   }else if(Input.getButtonPress("ArrowLeft")){
-    if (mapa[y][x - 1] != 1) {
+    if (map[y][x - 1] != 1) {
         x--
     }
   }else if(Input.getButtonPress("ArrowUp")){
-   if (mapa[y - 1][x] != 1) {
+   if (map[y - 1][x] != 1) {
         y--
     }
   } else if(Input.getButtonPress("ArrowDown")){
-    if (mapa[y + 1][x] != 1) {
+    if (map[y + 1][x] != 1) {
         y++
     }
   }
