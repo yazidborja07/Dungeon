@@ -66,6 +66,7 @@ const mapa = {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
+
 /**
  0 - nada
  1 - muro
@@ -73,6 +74,8 @@ const mapa = {
  */
 
 let jugador;
+
+let fantasmas = [];
 
 let size = 0;
 
@@ -82,9 +85,11 @@ let map = mapa.dungeon2;
 console.log(map);
 
 let playerImage;
+let ghostImage;
 
 function preload() {
   playerImage = loadImage("/assets/skeleton.png");
+  ghostImage = loadImage("/assets/fantasma.png");
 }
 
 function setup() {
@@ -100,6 +105,10 @@ function setup() {
   noSmooth();
 
   jugador = new Jugador(size, playerImage);
+
+  for (let i = 0; i < 3; i++) {
+    fantasmas.push(new Ghost(10 + 2, 10 - 1, size, ghostImage));
+  }
 }
 
 function dibujarMapa() {
@@ -124,6 +133,12 @@ function dibujarMapa() {
 
 function draw() {
   dibujarMapa();
+
+  for (let i = 0; i < fantasmas.length; i++) {
+    let gasparin = fantasmas[i];
+    gasparin.draw();
+    gasparin.update();
+  }
 
   jugador.update();
   jugador.draw();
