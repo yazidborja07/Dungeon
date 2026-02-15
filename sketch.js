@@ -19,7 +19,7 @@ const mapa = {
     [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
     [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   ],
   dungeon2: [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -41,7 +41,7 @@ const mapa = {
     [1, 1, 1, 0, 0, 5, 5, 1, 1, 5, 5, 1, 1, 5, 1, 1, 0, 1, 0, 1],
     [1, 0, 0, 1, 0, 1, 5, 5, 5, 1, 5, 1, 1, 5, 1, 1, 0, 1, 0, 1],
     [1, 1, 0, 0, 0, 1, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   ],
   dungeon3: [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -63,9 +63,9 @@ const mapa = {
     [1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  ],
-};
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+}
 
 /**
  0 - nada
@@ -73,73 +73,76 @@ const mapa = {
  5 - Agua
  */
 
-let jugador;
+let jugador
 
-let fantasmas = [];
+let fantasmas = []
 
-let size = 0;
+let size = 0
 
-let input;
+let input
 
-let map = mapa.dungeon2;
-console.log(map);
+let map = mapa.dungeon2
+console.log(map)
 
-let playerImage;
-let ghostImage;
+let playerImage
+let ghostImage
+
+let tiles
 
 function preload() {
-  playerImage = loadImage("/assets/skeleton.png");
-  ghostImage = loadImage("/assets/fantasma.png");
+  playerImage = loadImage('/assets/skeleton.png')
+  ghostImage = loadImage('/assets/fantasma.png')
+  tiles = loadImage('/assets/tiles.png')
 }
 
 function setup() {
-  let cuadro = createCanvas(650, 650);
-  cuadro.center(0);
+  let cuadro = createCanvas(650, 650)
+  cuadro.center(0)
 
-  Input.init();
+  Input.init()
 
-  background(100);
+  background(100)
 
-  size = width / map.length;
+  size = width / map.length
 
-  noSmooth();
+  noSmooth()
 
-  jugador = new Jugador(size, playerImage);
+  jugador = new Jugador(size, playerImage)
 
   for (let i = 0; i < 3; i++) {
-    fantasmas.push(new Ghost(10 + 2, 10 - 1, size, ghostImage));
+    fantasmas.push(new Ghost(10 + 2, 10 - 1, size, ghostImage))
   }
 }
 
 function dibujarMapa() {
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      const cell = map[y][x];
+      const cell = map[y][x]
 
-      stroke("white");
+      stroke('white')
 
       if (cell == 1) {
-        fill("gray");
+        fill('gray')
       } else if (cell == 5) {
-        fill("dodgerblue");
+        fill('dodgerblue')
       } else {
-        fill("black");
+        fill('black')
       }
 
-      rect(x * size, y * size, size, size);
+      rect(x * size, y * size, size, size)
     }
   }
 }
 
 function draw() {
-  dibujarMapa();
+  dibujarMapa()
 
   for (let i = 0; i < fantasmas.length; i++) {
-    let gasparin = fantasmas[i];
-    gasparin.draw();
-    gasparin.update();
+    let gasparin = fantasmas[i]
+    gasparin.draw()
+    gasparin.update()
   }
 
-  jugador.update();
-  jugador.draw();
+  jugador.update()
+  jugador.draw()
 }
