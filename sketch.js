@@ -77,6 +77,9 @@ function dibujarMapa() {
       }else if (cell == 7){
         xpos = 1 * 16
         ypos = 1 * 16
+      } else if (cell == 8){
+        xpos = 0 * 16
+        ypos = 0 * 16
       }
 
       image(
