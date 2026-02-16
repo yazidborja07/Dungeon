@@ -4,6 +4,10 @@ class Ghost {
   constructor(x, y, size, image) {
     this.x = x;
     this.y = y;
+
+    this.xd = this.x
+    this.yd = this.y
+
     this.size = size;
     this.image = image;
 
@@ -69,11 +73,13 @@ class Ghost {
   draw() {
     image(
       this.image,
-      this.x * this.size,
-      this.y * this.size,
+      this.xd * this.size,
+      this.yd * this.size,
       this.size,
-      this.size,
-    );
+      this.size
+    )
+    this.xd += (this.x - this.xd) * 0.15
+    this.yd += (this.y - this.yd) * 0.15
   }
 }
 
